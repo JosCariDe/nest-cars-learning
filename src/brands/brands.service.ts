@@ -42,11 +42,43 @@ export class BrandsService {
     return brand;
   }
 
-  update(id: number, updateBrandDto: UpdateBrandDto) {
-    return `This action updates a #${id} brand`;
+  update(id: string, updateBrandDto: UpdateBrandDto) {
+
+    let brandDB = this.findOne(id);
+
+    this.brands = this.brands.map(brand => {
+
+      if (brand.id === id){
+        brandDB.updatedAt = new Date().getTime();
+        brandDB = {
+          ...brandDB,
+          ...updateBrandDto,
+          id
+        }
+
+        return brandDB
+      }
+
+      return brand
+
+    })
+
+
+    return {
+      message: `Brand con el id ${id} actualizado correctamente`,
+      data: brandDB
+    };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} brand`;
+  remove(id: string) {
+
+    let res = this.findOne(id)
+
+    this.brands = this.brands.filter(brand => brand.id !== id)
+
+    return {
+      message: `Brand con el id ${id} eliminado con exito`,
+      data: res
+    };
   }
 }
