@@ -83,6 +83,10 @@ export class CarsService {
         let carDB = this.findOne(id);
 
         this.cars = this.cars.filter( car => car.id !== id);
+
+        return {
+            message: `car whit id: ${id} deleted success`
+        }
     }
     
 }
