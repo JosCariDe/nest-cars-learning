@@ -78,5 +78,9 @@ export class CarsService {
             message: `car whit id: ${id} deleted success`
         }
     }
+
+    fillCarsWithSeedData( cars: Car[] ) {
+        this.cars = cars;
+    }
     
 }
